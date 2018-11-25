@@ -5,7 +5,6 @@ namespace Notification;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 class Email
 {
     private $mail = \stdClass::class;
