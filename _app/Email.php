@@ -10,21 +10,21 @@ class Email
 {
     private $mail = \stdClass::class;
 
-    public function __construct()
+    public function __construct($smtpDebug, $host, $user, $pass, $smtpSecure, $port, $setFromEmail, $setFromName)
     {
         $this->mail = new PHPMailer(true);
-        $this->mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $this->mail->SMTPDebug = $smtpDebug;                                 // Enable verbose debug output
         $this->mail->isSMTP();                                      // Set mailer to use SMTP
-        $this->mail->Host = 'mail.showsite.com.br';  // Specify main and backup SMTP servers
+        $this->mail->Host = $host;  // Specify main and backup SMTP servers
         $this->mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $this->mail->Username = 'contato@showsite.com.br';                 // SMTP username
-        $this->mail->Password = 'Showsite2509#';                           // SMTP password
-        $this->mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-        $this->mail->Port = 465;                                    // TCP port to connect to
+        $this->mail->Username = $user;                 // SMTP username
+        $this->mail->Password = $pass;                           // SMTP password
+        $this->mail->SMTPSecure = $smtpSecure;                            // Enable TLS encryption, `ssl` also accepted
+        $this->mail->Port = $port;                                    // TCP port to connect to
         $this->mail->CharSet = 'utf-8';
         $this->mail->setLanguage('br');
         $this->mail->isHTML(true);
-        $this->mail->setFrom('contato@showsite.com.br', 'Adauto Nobre');
+        $this->mail->setFrom($setFromEmail, $setFromName);
     }
 
     public function sendMail($subject, $body, $replyEmail, $replyName, $addressEmail, $addressName)
